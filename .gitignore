@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.log
+
+# Virtual environment
+venv/
+.env/
+
+# PyTorch checkpoint files
+checkpoints/
+*.pt
+*.pth
+
+# Jupyter notebook checkpoints (if any)
+.ipynb_checkpoints/
+
+# Data/cache/logs
+*.npy
+*.npz
+*.csv
+
+# TensorBoard logs
+runs/
+
+# VS Code settings
+.vscode/
+
+# OS-specific
+.DS_Store
+Thumbs.db
