@@ -133,6 +133,11 @@ class SnakeEnv:
         return state
 
     def render(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+
         self.game_window.fill(self.colors["black"])
         for pos in self.snake_body:
             pygame.draw.rect(self.game_window, self.colors["green"], pygame.Rect(pos[0], pos[1], self.block_size, self.block_size))

@@ -12,6 +12,7 @@ class DQNAgent:
         self.epsilon_decay = 0.995
         self.min_epsilon = 0.01
         self.learning_rate = 0.001
+        self.gamma = 0.99
         self.update_freq = 1000  
         self.step_counter = 0    
         #models
@@ -69,7 +70,7 @@ class DQNAgent:
         self.step_counter += 1
         if self.step_counter % self.update_freq == 0:
             self.update_target_model()
-            
+
     def update_target_model(self):
         self.model_target.load_state_dict(self.model.state_dict())
 
