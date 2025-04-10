@@ -3,7 +3,7 @@ import random
 import numpy as np
 
 class SnakeEnv:
-    def __init__(self, width=720, height=480, block_size=10, difficulty=25):
+    def __init__(self, width=720, height=480, block_size=10, difficulty=1000):
         pygame.init()
         self.width = width
         self.height = height
@@ -34,10 +34,13 @@ class SnakeEnv:
         return self.get_state()
 
     def spawn_food(self):
-        self.food_pos = [
-            random.randrange(1, (self.width // self.block_size)) * self.block_size,
-            random.randrange(1, (self.height // self.block_size)) * self.block_size
-        ]
+        while True:
+            food_x = random.randrange(0, self.width // self.block_size) * self.block_size
+            food_y = random.randrange(0, self.height // self.block_size) * self.block_size
+            food_pos = [food_x, food_y]
+            if food_pos not in self.snake_body:
+                self.food_pos = food_pos
+                break
 
     def step(self, action):
         # Actions: 0 = straight, 1 = right, 2 = left

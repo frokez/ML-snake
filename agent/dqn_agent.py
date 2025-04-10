@@ -63,8 +63,6 @@ class DQNAgent:
         loss.backward()
         self.optimizer.step()
 
-        #epsilon decay
-        self.epsilon = max(self.min_epsilon, self.epsilon * self.epsilon_decay)
 
         #update target network periodically
         self.step_counter += 1

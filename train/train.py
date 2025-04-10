@@ -25,7 +25,6 @@ for episode in range(NUM_EPISODES):
         agent.replay_buffer.add(state, action, reward, next_state, done)
         agent.train()
         
-        env.render()
 
         state = next_state
         total_reward += reward
@@ -35,8 +34,11 @@ for episode in range(NUM_EPISODES):
             average_score = sum(scores[-100:]) / min(len(scores), 100)
             average_scores.append(average_score)
             print(f"Episode {episode}, Score: {env.score}, Avg(100): {average_score:.2f}, Epsilon: {agent.epsilon:.3f}")
+            if agent.epsilon > agent.min_epsilon: # epsilon decay
+                agent.epsilon *= agent.epsilon_decay
+                agent.epsilon = max(agent.epsilon, agent.min_epsilon)
             break
-        if episode % 100 == 0:  # Save every 100 episodes
+        if episode % 100 == 0:  #save every 100 episodes
             torch.save(agent.model.state_dict(), f"checkpoints/snake_dqn_ep{episode}.pth")
 
 plt.plot(scores, label='Score')
